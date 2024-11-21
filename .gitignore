@@ -2,3 +2,9 @@
 #/.packages
 #/.dart_tool
 #/example/ios/Podfile.lock
+### IntelliJ IDEA ###
+.idea
+android/build/
+android/.idea
+pubspec.lock
+
