@@ -1,5 +1,6 @@
 /// Message Types
 class MessageType {
+  static const unkonwn = 0;
   /// Normal text
   static const text = 101;
 

@@ -923,17 +923,22 @@ class GroupHasReadInfo {
   /// Total number of reads
   int? hasReadCount;
 
-  int? unreadCount;
+  int? groupMemberCount;
+
+  List<String>? hasReadUserIDList;
 
   GroupHasReadInfo.fromJson(Map<String, dynamic> json) {
     hasReadCount = json['hasReadCount'] ?? 0;
-    unreadCount = json['unreadCount'] ?? 0;
+    groupMemberCount = json['groupMemberCount'] ?? 0;
+    print("GroupHasReadInfo.fromJson hasReadUserIDList ${json['hasReadUserIDList']}");
+    hasReadUserIDList = json['hasReadUserIDList'] == null ? [] : json['hasReadUserIDList'].cast<String>() ?? [];
   }
 
   Map<String, dynamic> toJson() {
-    final data = Map<String, dynamic>();
-    data['hasReadCount'] = this.hasReadCount;
-    data['unreadCount'] = this.unreadCount;
+    final data = <String, dynamic>{};
+    data['hasReadCount'] = hasReadCount;
+    data['groupMemberCount'] = groupMemberCount;
+    data['hasReadUserIDList'] = hasReadUserIDList;
     return data;
   }
 }
@@ -986,6 +991,76 @@ class ReadReceiptInfo {
     return data;
   }
 }
+
+/// Class representing read information for group messages.
+class GroupMessageReceipt {
+  late String conversationID; // The ID of the conversation.
+
+  /// A list of read information for group messages.
+  List<GroupMessageReadInfo> groupMessageReadInfo = [];
+
+  GroupMessageReceipt({
+    this.groupMessageReadInfo = const [],
+    required this.conversationID,
+  });
+
+  GroupMessageReceipt.fromJson(Map<String, dynamic> json) {
+    groupMessageReadInfo =
+        (json['groupMessageReadInfo'] as List?)?.map((e) => GroupMessageReadInfo.fromJson(e)).toList() ?? [];
+
+    conversationID = json['conversationID'];
+  }
+
+  /// Converts the object to a JSON map.
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['groupMessageReadInfo'] = groupMessageReadInfo;
+    data['conversationID'] = conversationID;
+
+    return data;
+  }
+}
+
+/// Class representing read information for a group message.
+class GroupMessageReadInfo {
+  /// List of members who have read the message.
+  List<GroupMembersInfo> readMembers = [];
+
+  /// Total count of members who have read the message.
+  int hasReadCount = 0;
+
+  /// The number of unread members when the message was sent.
+  int unreadCount = 0;
+
+  /// The client message ID, unique for each message.
+  late String clientMsgID;
+
+  GroupMessageReadInfo({
+    this.readMembers = const [],
+    this.hasReadCount = 0,
+    this.unreadCount = 0,
+    this.clientMsgID = '',
+  });
+
+  GroupMessageReadInfo.fromJson(Map<String, dynamic> json) {
+    readMembers = (json['readMembers'] as List?)?.map((e) => GroupMembersInfo.fromJson(e)).toList() ?? [];
+    hasReadCount = json['hasReadCount'];
+    unreadCount = json['unreadCount'];
+    clientMsgID = json['clientMsgID'];
+  }
+
+  /// Converts the object to a JSON map.
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['readMembers'] = readMembers;
+    data['hasReadCount'] = hasReadCount;
+    data['unreadCount'] = unreadCount;
+    data['clientMsgID'] = clientMsgID;
+
+    return data;
+  }
+}
+
 
 /// Offline push information
 class OfflinePushInfo {

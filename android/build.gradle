@@ -21,11 +21,16 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:7.3.1'
+        //classpath 'com.android.tools.build:gradle:8.3.2'
     }
 }
 
 rootProject.allprojects {
     repositories {
+        maven {
+            allowInsecureProtocol true
+            url 'http://172.16.117.250:8081/repository/maven-public/'
+        }
         google()
         mavenCentral()
     }
@@ -45,6 +50,15 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
-    implementation 'io.openim:core-sdk:3.8.1@aar'
+    // implementation 'io.openim:core-sdk:3.8.1@aar'
+    implementation 'io.openim:lor-core-sdk:3.8.1@aar'
+    // implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //implementation fileTree(include: ['*.aar'], dir: 'libs')
 }

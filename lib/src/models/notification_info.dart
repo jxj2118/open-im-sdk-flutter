@@ -195,7 +195,7 @@ class InvitedJoinGroupNotification {
 }
 
 /// 组踢出成员通知
-class KickedGroupMemeberNotification {
+class KickedGroupMemberNotification {
   /// 群信息
   GroupInfo? group;
 
@@ -205,10 +205,10 @@ class KickedGroupMemeberNotification {
   /// 被踢出群的成员信息列表
   List<GroupMembersInfo>? kickedUserList;
 
-  KickedGroupMemeberNotification(
+  KickedGroupMemberNotification(
       {this.group, this.opUser, this.kickedUserList});
 
-  KickedGroupMemeberNotification.fromJson(Map<String, dynamic> json) {
+  KickedGroupMemberNotification.fromJson(Map<String, dynamic> json) {
     group = json['group'] != null ? GroupInfo.fromJson(json['group']) : null;
     opUser = json['opUser'] != null
         ? GroupMembersInfo.fromJson(json['opUser'])
@@ -296,7 +296,7 @@ class EnterGroupNotification {
 }
 
 /// 群权转让通知
-class GroupRightsTransferNoticication {
+class GroupRightsTransferNotification {
   /// 群信息
   GroupInfo? group;
 
@@ -306,13 +306,13 @@ class GroupRightsTransferNoticication {
   /// 群新的拥有者信息
   GroupMembersInfo? newGroupOwner;
 
-  GroupRightsTransferNoticication({
+  GroupRightsTransferNotification({
     this.group,
     this.opUser,
     this.newGroupOwner,
   });
 
-  GroupRightsTransferNoticication.fromJson(Map<String, dynamic> json) {
+  GroupRightsTransferNotification.fromJson(Map<String, dynamic> json) {
     group = json['group'] != null ? GroupInfo.fromJson(json['group']) : null;
     opUser = json['opUser'] != null
         ? GroupMembersInfo.fromJson(json['opUser'])
