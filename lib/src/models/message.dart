@@ -930,7 +930,7 @@ class GroupHasReadInfo {
   GroupHasReadInfo.fromJson(Map<String, dynamic> json) {
     hasReadCount = json['hasReadCount'] ?? 0;
     groupMemberCount = json['groupMemberCount'] ?? 0;
-    print("GroupHasReadInfo.fromJson hasReadUserIDList ${json['hasReadUserIDList']}");
+    // print("GroupHasReadInfo.fromJson hasReadUserIDList ${json['hasReadUserIDList']}");
     hasReadUserIDList = json['hasReadUserIDList'] == null ? [] : json['hasReadUserIDList'].cast<String>() ?? [];
   }
 
